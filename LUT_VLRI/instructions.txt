@@ -1,0 +1,17 @@
+To compile:
+g++ -O3 -std=c++17 -fopenmp \
+    build_vlri_lut.cpp \
+    -I../../nuSQuIDS/src \
+    -isystem ../../nuSQuIDS/include \
+    -isystem /usr/include/hdf5/serial \
+    -L../../nuSQuIDS/lib \
+    -L/usr/lib/x86_64-linux-gnu/hdf5/serial \
+    -Wl,-rpath,'$ORIGIN/../../nuSQuIDS/lib' \
+    -lnuSQuIDS \
+    -lSQuIDS \
+    -lgsl \
+    -lgslcblas \
+    -lhdf5_hl \
+    -lhdf5 \
+    -lm \
+    -o build_vlri_lut_expanded
