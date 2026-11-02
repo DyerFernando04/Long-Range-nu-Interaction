@@ -1,0 +1,10 @@
+Standard full:	        ./generate_flux_lut standard 32
+Standard smoke:	        ./generate_flux_lut standard 32 smoke
+Only atmosphere:	./generate_flux_lut atmosphere 32
+Only atmosphere smoke:	./generate_flux_lut atmosphere 32 smoke
+L_e-L_mu full:          ./generate_flux_lut Le-Lmu 32
+L_e-L_mu smoke:         ./generate_flux_lut Le-Lmu 32 smoke
+L_e-L_tau full:         ./generate_flux_lut Le-Ltau 32
+L_e-L_tau smoke	        ./generate_flux_lut Le-Ltau 32 smoke
+L_mu-L_tau full:        ./generate_flux_lut Lmu-Ltau 32
+L_mu-L_tau smoke:	./generate_flux_lut Lmu-Ltau 32 smoke

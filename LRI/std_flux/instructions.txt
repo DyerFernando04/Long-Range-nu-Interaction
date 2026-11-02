@@ -1,1 +1,0 @@
-OMP_NUM_THREADS=16 ./generate_flux_std ../INITIAL_FLUX/mceq_initial_fluxes1.h5 ../RESULTS/standard/oscillated_flux_std.h5 1.5
