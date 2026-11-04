@@ -1,0 +1,270 @@
+{
+    "_comment_global": "IceCube DeepCore Le-Ltau / event-level HDF5 3.1. SAFE/RUNNABLE CONFIGURATION: 2 LRI parameters + 9 existing nuisance parameters FLOAT. ma_ccqe, ma_ccres, dis_csms are explicitly FIXED to nominal values. theta23 and dm31 are held at the nominal values implicit in the precomputed nuSQuIDS templates (dm31 read from the HDF5; theta23 not recorded there). The optional _future_floating_parameters block DOCUMENTS how to expand to 16 floating parameters; it is inert and must not be treated as an active fit.",
+
+    "experiment": "IceCube_DeepCore_LeLtau_eventlevel_11params",
+
+    "lri_model": "Le-Ltau",
+
+    "_comment_lri_model": "Model=Le-Ltau; kernel reads results/templates/Le-Ltau.h5 from LRI_REPOSITORY_ROOT. For Lmu-Ltau, log10_g represents log10|G_mutau| with the signed coupling branch in HDF5.",
+
+    "output_dir": "results/LeLtau/lri_v31_11float_xsec_fixed",
+
+    "_comment_scan_settings": "Currently floats only 11 variables, with 1D scans on all 11 and 2D scans on (log10_g, log10_m), profiling the other nine. Once physical responses are available, add new nuisance names to start_values and optionally target_subset_1d; the 2D target subset remains (log10_g,log10_m). num_cores can be overridden from the CLI.",
+
+    "scan_settings": {
+        "num_cores": 8,
+        "use_checkpointing": true,
+        "skip_sanity_check": false,
+        "merge_disconnected_islands": true,
+        "island_merge_tolerance": 0.1,
+        "enforce_spline_monotonicity": false,
+
+        "n_steps": 80,
+        "scan_range_sigma": 4.0,
+        "force_rigid_bounds": true,
+
+        "use_n_points_internal": false,
+        "n_points_internal": 100,
+
+        "scan_2d": true,
+        "scan_2d_only": false,
+        "n_steps_2d": 50,
+        "scan_range_sigma_2d": 4.0,
+
+        "use_explicit_step_sizes": true,
+        "use_linear_interp": false,
+        "use_fuzzy_cache": false,
+
+        "log_scan_parameters": [],
+
+        "target_subset_1d": [
+            "log10_g",
+            "log10_m",
+            "dom_eff",
+            "hole_ice_p0",
+            "hole_ice_p1",
+            "bulk_ice_abs",
+            "bulk_ice_scatter",
+            "delta_gamma_nu",
+            "nc_cc_ratio",
+            "neutrino_norm",
+            "muon_norm"
+        ],
+
+        "target_subset_2d": [
+            "log10_g",
+            "log10_m"
+        ],
+
+        "clip_contour_smearing": false,
+        "smooth_marginalized_1d": false,
+        "save_nuisance_evolution": true
+    },
+
+    "_comment_repair": "Retain raw likelihood profile surfaces. Point-level Minuit retries and simplex polishing remain available; no smoothing or repair of raw profiles.",
+
+    "repair_settings": {
+        "disable_outlier_repair": true,
+        "use_simplex_polish": true,
+        "minuit_retries": 3,
+        "spike_threshold": 0.2,
+        "continuity_threshold": 1.0,
+        "gradient_threshold": 50.0,
+        "max_repair_passes": 10
+    },
+
+    "_comment_steps": "Numerical Minuit step sizes, not systematic uncertainty widths.",
+
+    "step_sizes": {
+        "log10_g": 0.05,
+        "log10_m": 0.05,
+        "dom_eff": 0.01,
+        "hole_ice_p0": 0.05,
+        "hole_ice_p1": 0.01,
+        "bulk_ice_abs": 0.01,
+        "bulk_ice_scatter": 0.01,
+        "delta_gamma_nu": 0.01,
+        "nc_cc_ratio": 0.02,
+        "neutrino_norm": 0.02,
+        "muon_norm": 0.05
+    },
+
+    "_comment_limits": "Physical log10_g and log10_m bounds retain the OLD [-30,-24], [-15,-11] values and have not been checked against the true HDF5 3.1 axes. BEFORE a real fit, compare axes/log10_abs_coupling and axes/log10_mass_eV against parameter_limits and validate start_values. Other limits are from the prior config.",
+
+    "parameter_limits": {
+        "log10_g": [-30.0, -24.0],
+        "log10_m": [-15.0, -11.0],
+
+        "dom_eff": [0.8, 1.2],
+        "hole_ice_p0": [-2.0, 1.0],
+        "hole_ice_p1": [-0.2, 0.2],
+
+        "bulk_ice_abs": [0.9, 1.1],
+        "bulk_ice_scatter": [0.95, 1.15],
+
+        "delta_gamma_nu": [-0.5, 0.5],
+        "nc_cc_ratio": [0.2, 1.8],
+
+        "neutrino_norm": [0.2, 2.0],
+        "muon_norm": [0.0, 5.0]
+    },
+
+    "_comment_fixed": "These three parameters are passed explicitly through kernel.PARAMETER_ORDER but are NOT free in Minuit. In the likelihood, exactly nominal axial masses and dis_csms=0 have unit event reweights. Keep axial_mass_reweight_convention=unconfirmed and dis_csms_response_file=null until physically validated. Do not invent the actual theta23 nominal angle: only dm31 nominal is recoverable from hypersurfaces.attrs[dm31_fixed_eV2] in the HDF5 3.1.",
+
+    "fixed_params": {
+        "ma_ccqe": 0.99,
+        "ma_ccres": 1.12,
+        "dis_csms": 0.0
+    },
+
+    "_comment_starts": "Original 3.0 starting values; check physical log10_g and log10_m against new 3.1 HDF5 axes before starting minimization.",
+
+    "start_values": {
+        "log10_g": -27.0,
+        "log10_m": -13.0,
+
+        "dom_eff": 1.0,
+        "hole_ice_p0": 0.1,
+        "hole_ice_p1": -0.05,
+
+        "bulk_ice_abs": 1.0,
+        "bulk_ice_scatter": 1.0,
+
+        "delta_gamma_nu": 0.0,
+        "nc_cc_ratio": 1.0,
+
+        "neutrino_norm": 1.0,
+        "muon_norm": 1.0
+    },
+
+    "_comment_fallbacks": "Only previous three Gaussian priors are ACTIVE: DOM 1.0+/-0.1, delta_gamma_nu 0.0+/-0.1, NC/CC 1.0+/-0.2. Do not add axial, DIS or oscillation priors before their physical definitions and corresponding external likelihood are validated.",
+
+    "fallbacks": {
+        "dom_eff": [
+            "gauss",
+            1.0,
+            0.1
+        ],
+        "delta_gamma_nu": [
+            "gauss",
+            0.0,
+            0.1
+        ],
+        "nc_cc_ratio": [
+            "gauss",
+            1.0,
+            0.2
+        ]
+    },
+
+    "coupled_priors": {},
+
+    "asimov_injections": {},
+
+    "input_configs": [],
+
+    "use_quadratic_fallback": false,
+
+    "_comment_confidence": "Asymptotic Wilks thresholds from previous configuration; FC calibration deferred. The fixed-standard-oscillation, fixed-axial, fixed-CSMS fit is not equivalent to profiling all 16 parameters and its coverage has not been calibrated.",
+
+    "confidence_thresholds": {
+        "1sigma": 1.0,
+        "2sigma": 4.0,
+        "3sigma": 9.0,
+
+        "1sigma_2d": 2.3,
+        "2sigma_2d": 6.18,
+        "3sigma_2d": 11.83
+    },
+
+    "_comment_output_dir": "New output directory: do not reuse old 11-parameter checkpoint files, because the new kernel vector now also contains three fixed cross-section parameters.",
+
+    "axial_mass_reweight_convention": "unconfirmed",
+
+    "dis_csms_response_file": null,
+
+    "theta23_nominal_rad": null,
+
+    "oscillation_weight_provider": null,
+
+    "node_cache_size": 16,
+
+    "validate_nominal_node": true,
+
+    "_comment_response_settings": "SAFE defaults: axial linear/quadratic coefficients need a verified polynomial coordinate; GENIE->CSMS needs an event-matched NPZ of total+differential factors; theta23/dm31 require validated nuSQuIDS weight responses. The kernel intentionally errors before Minuit if a response is missing.",
+
+    "_future_floating_parameters": {
+        "_note": "DOCUMENTATION ONLY. This block is ignored by GenericLikelihoodWrapper and by the kernel. To float a parameter, REMOVE it from fixed_params (if present) and ADD it to start_values, step_sizes, parameter_limits and, only once justified, fallbacks/input_configs. For theta23/dm31 provide a real oscillation_weight_provider.",
+
+        "ma_ccqe": {
+            "proposed_start_GeV": 0.99,
+            "provisional_limits_GeV": [
+                0.5445,
+                1.7325
+            ],
+            "proposed_minuit_step_GeV": 0.01,
+            "prior_note": "Asymmetric uncertainty -15%/+25%; GenericLikelihoodWrapper needs an asymmetric prior implementation or validated external prior. Do not approximate silently with a Gaussian.",
+            "requirements": [
+                "validate_GENIE_polynomial_coordinate",
+                "set_axial_mass_reweight_convention"
+            ]
+        },
+
+        "ma_ccres": {
+            "proposed_start_GeV": 1.12,
+            "provisional_limits_GeV": [
+                0.448,
+                1.792
+            ],
+            "proposed_minuit_step_GeV": 0.01,
+            "prior_note": "If using a 20% Gaussian uncertainty, justify it against the adopted public analysis and use sigma=0.224 GeV.",
+            "requirements": [
+                "validate_GENIE_polynomial_coordinate",
+                "set_axial_mass_reweight_convention"
+            ]
+        },
+
+        "dis_csms": {
+            "proposed_start": 0.0,
+            "provisional_limits": [
+                -1.0,
+                2.0
+            ],
+            "proposed_minuit_step": 0.05,
+            "prior_note": "No prior has been imposed; verify parameter meaning/uncertainty from the corresponding IceCube release.",
+            "requirements": [
+                "generate_validated_dis_csms_response_npz",
+                "set_dis_csms_response_file"
+            ]
+        },
+
+        "theta23": {
+            "required_start_rad": null,
+            "provisional_limits_rad": [
+                0.0,
+                1.570796326795
+            ],
+            "proposed_minuit_step_rad": 0.01,
+            "prior_note": "Do not invent an external theta23 prior; preserve correlations with dm31 if using external oscillation constraints.",
+            "requirements": [
+                "verify_theta23_exactly_used_in_nusquids",
+                "set_theta23_nominal_rad",
+                "set_oscillation_weight_provider"
+            ]
+        },
+
+        "dm31": {
+            "required_start_eV2": null,
+            "provisional_limits_eV2": [
+                0.0005,
+                0.005
+            ],
+            "proposed_minuit_step_eV2": 1e-05,
+            "prior_note": "Read actual HDF5 nominal first; do not assume main.cpp default of 2.47e-3 equals the 2.513e-3 in hypersurface metadata.",
+            "requirements": [
+                "verify_dm31_nominal_eV2_from_HDF5",
+                "set_oscillation_weight_provider"
+            ]
+        }
+    }
+}
